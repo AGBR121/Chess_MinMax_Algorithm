@@ -42,7 +42,8 @@ def findBestMove(gs, validMoves):
     nextMove = None
     random.shuffle(validMoves)
     #findMoveMinMax(gs, validMoves, DEPTH, gs.whiteToMove)
-    findMoveNegaMaxAlphaBeta(gs, validMoves, DEPTH,-CHECKMATE, CHECKMATE ,1 if gs.whiteToMove else -1)
+    #findMoveNegaMaxAlphaBeta(gs, validMoves, DEPTH,-CHECKMATE, CHECKMATE ,1 if gs.whiteToMove else -1)
+    findMoveMinMaxAlphaBeta(gs, validMoves, DEPTH, -CHECKMATE, CHECKMATE, gs.whiteToMove)
     return nextMove
 
 def findMoveMinMax(gs, validMoves, depth, whiteToMove):
@@ -112,7 +113,46 @@ def findMoveNegaMaxAlphaBeta(gs, validMoves, depth, alpha, beta,turnMultiplier):
             break
     return maxScore
 
+def findMoveMinMaxAlphaBeta(gs, validMoves, depth, alpha, beta, isMaximizingPlayer):
+    global nextMove
+    if depth == 0:
+        return scoreBoard(gs)
 
+    if isMaximizingPlayer:  
+        maxScore = -CHECKMATE
+        for move in validMoves:
+            gs.makeMove(move)
+            nextMoves = gs.getValidMoves()
+            score = findMoveMinMaxAlphaBeta(gs, nextMoves, depth - 1, alpha, beta, False)
+            gs.undoMove()
+
+            if score > maxScore:
+                maxScore = score
+                if depth == DEPTH:
+                    nextMove = move
+
+            alpha = max(alpha, score)
+            if beta <= alpha:  
+                break
+        return maxScore
+
+    else:  
+        minScore = CHECKMATE
+        for move in validMoves:
+            gs.makeMove(move)
+            nextMoves = gs.getValidMoves()
+            score = findMoveMinMaxAlphaBeta(gs, nextMoves, depth - 1, alpha, beta, True)
+            gs.undoMove()
+
+            if score < minScore:
+                minScore = score
+                if depth == DEPTH:
+                    nextMove = move
+
+            beta = min(beta, score)
+            if beta <= alpha:  
+                break
+        return minScore
 
 def scoreBoard(gs):
     if gs.checkMate:
@@ -132,8 +172,6 @@ def scoreBoard(gs):
                 score -= pieceScore[square[1]]
 
     return score
-
-
 
 def scoreMaterial(board):
     score = 0
