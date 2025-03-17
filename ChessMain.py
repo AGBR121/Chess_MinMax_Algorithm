@@ -28,8 +28,8 @@ def main():
     sqSelected = ()
     playerClicks = []
     gameOver = False
-    playerOne = True
-    playerTwo = False
+    playerOne = False
+    playerTwo = True
     while running:
         humanTurn = (gs.whiteToMove and playerOne) or (not gs.whiteToMove and playerTwo)
 
@@ -64,6 +64,7 @@ def main():
                     gs.undoMove()
                     moveMade = True
                     animate = False
+                    gameOver = False
                 if e.key == p.K_r: # reset the board when 'r' is pressed
                     gs = ChessEngine.GameState()
                     validMoves = gs.getValidMoves()
@@ -71,6 +72,7 @@ def main():
                     playerClicks = []
                     moveMade = False
                     animate = False
+                    gameOver = False
 
         if not gameOver and not humanTurn:
             AIMove = SmartMoveFinder.findBestMove(gs, validMoves)
