@@ -1,5 +1,6 @@
 class GameState():
     def __init__(self):
+        
         self.board = [
             ["bR", "bN", "bB", "bQ", "bK", "bB", "bN", "bR"],
             ["bp", "bp", "bp", "bp", "bp", "bp", "bp", "bp"],
@@ -10,6 +11,18 @@ class GameState():
             ["wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp"],
             ["wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"]
         ]
+       
+        """ self.board = [
+            ["--", "--", "--", "bQ", "--", "bR", "bK", "--"],
+            ["--", "--", "--", "--", "--", "--", "bp", "wR"],
+            ["--", "--", "--", "--", "--", "--", "wp", "--"],
+            ["wB", "bp", "--", "--", "--", "--", "--", "--"],
+            ["--", "wp", "--", "--", "--", "--", "--", "--"],
+            ["--", "--", "bp", "--", "--", "--", "--", "--"],
+            ["--", "--", "wp", "--", "--", "--", "--", "--"],
+            ["--", "--", "--", "wQ", "--", "--", "--", "wK"]
+        ] """
+
 
         self.moveFunctions = {"p": self.getPawnMoves, "R": self.getRookMoves, "N": self.getKnightMoves,
                               "B": self.getBishopMoves, "Q": self.getQueenMoves, "K": self.getKingMoves}
@@ -21,7 +34,8 @@ class GameState():
         self.checkMate = False
         self.staleMate = False
         self.enpassantPossible = ()
-        self.currentCastlingRight = CastleRights(True, True, True, True)
+        #self.currentCastlingRight = CastleRights(True, True, True, True)
+        self.currentCastlingRight = CastleRights(False, False, False, False)
         self.castleRightsLog = [CastleRights(self.currentCastlingRight.wks, self.currentCastlingRight.bks, self.currentCastlingRight.wqs, self.currentCastlingRight.bqs)]
 
 
