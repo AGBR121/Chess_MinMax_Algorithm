@@ -41,9 +41,8 @@ def findBestMove(gs, validMoves):
     global nextMove
     nextMove = None
     random.shuffle(validMoves)
-    #findMoveMinMax(gs, validMoves, DEPTH, gs.whiteToMove)
-    #findMoveNegaMaxAlphaBeta(gs, validMoves, DEPTH,-CHECKMATE, CHECKMATE ,1 if gs.whiteToMove else -1)
-    findMoveMinMaxAlphaBeta(gs, validMoves, DEPTH, -CHECKMATE, CHECKMATE, gs.whiteToMove)
+    findMoveMinMax(gs, validMoves, DEPTH, gs.whiteToMove)
+    #findMoveMinMaxAlphaBeta(gs, validMoves, DEPTH, -CHECKMATE, CHECKMATE, gs.whiteToMove)
     return nextMove
 
 def findMoveMinMax(gs, validMoves, depth, whiteToMove):
@@ -74,7 +73,7 @@ def findMoveMinMax(gs, validMoves, depth, whiteToMove):
                     nextMove = move
             gs.undoMove()
         return minScore
-    
+    '''
 def findMoveNegaMax(gs, validMoves, depth, turnMultiplier):
     global nextMove
     if depth == 0:
@@ -112,6 +111,7 @@ def findMoveNegaMaxAlphaBeta(gs, validMoves, depth, alpha, beta,turnMultiplier):
         if alpha >= beta:
             break
     return maxScore
+'''
 
 def findMoveMinMaxAlphaBeta(gs, validMoves, depth, alpha, beta, isMaximizingPlayer):
     global nextMove
@@ -153,6 +153,7 @@ def findMoveMinMaxAlphaBeta(gs, validMoves, depth, alpha, beta, isMaximizingPlay
             if beta <= alpha:  
                 break
         return minScore
+
 
 def scoreBoard(gs):
     if gs.checkMate:

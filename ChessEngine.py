@@ -1,6 +1,6 @@
 class GameState():
     def __init__(self):
-        
+        """
         self.board = [
             ["bR", "bN", "bB", "bQ", "bK", "bB", "bN", "bR"],
             ["bp", "bp", "bp", "bp", "bp", "bp", "bp", "bp"],
@@ -12,7 +12,8 @@ class GameState():
             ["wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"]
         ]
        
-        """ self.board = [
+        """ 
+        self.board = [
             ["--", "--", "--", "bQ", "--", "bR", "bK", "--"],
             ["--", "--", "--", "--", "--", "--", "bp", "wR"],
             ["--", "--", "--", "--", "--", "--", "wp", "--"],
@@ -21,7 +22,7 @@ class GameState():
             ["--", "--", "bp", "--", "--", "--", "--", "--"],
             ["--", "--", "wp", "--", "--", "--", "--", "--"],
             ["--", "--", "--", "wQ", "--", "--", "--", "wK"]
-        ] """
+        ] 
 
 
         self.moveFunctions = {"p": self.getPawnMoves, "R": self.getRookMoves, "N": self.getKnightMoves,
